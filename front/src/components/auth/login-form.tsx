@@ -21,19 +21,19 @@ export default function LoginForm() {
       className="max-w-md mx-auto space-y-6"
     >
       <div className="space-y-4">
-        <InputField label="Email">
+        <FormField label="Email">
           <Input
             type="text"
-            name="name"
+            name="email"
             placeholder="name@example.com"
           />
-        </InputField>
-        <InputField label="Password">
+        </FormField>
+        <FormField label="Password">
           <Input
             type="password"
             name="password"
           />
-        </InputField>
+        </FormField>
       </div>
       <LoginButton />
     </form>
@@ -51,7 +51,7 @@ function LoginButton() {
   );
 }
 
-function InputField({
+function FormField({
   label,
   children
 }: {
@@ -85,7 +85,7 @@ function Input({ ...props }) {
 
 export {
   LoginButton,
-  InputField,
+  FormField,
   Label,
   Input,
 }
