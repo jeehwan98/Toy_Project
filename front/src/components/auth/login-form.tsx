@@ -35,17 +35,23 @@ export default function LoginForm() {
           )}
         </FormField>
       </div>
-      <LoginButton isPending={isPending} />
+      <SubmitButton text="Login" isPending={isPending} />
     </form>
   );
 }
 
-function LoginButton({ isPending }: { isPending: boolean }) {
+function SubmitButton({
+  text,
+  isPending
+}: {
+  text: string;
+  isPending: boolean
+}) {
   return (
     <Button
       className="w-full font-semibold py-2 px-4"
     >
-      {isPending ? "Logging..." : "Login"}
+      {isPending ? "Submitting..." : text}
     </Button>
   );
 }
@@ -83,7 +89,7 @@ function Input({ ...props }) {
 }
 
 export {
-  LoginButton,
+  SubmitButton,
   FormField,
   Label,
   Input,
