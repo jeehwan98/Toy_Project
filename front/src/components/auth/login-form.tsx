@@ -64,7 +64,7 @@ function FormField({
   children: React.ReactNode
 }) {
   return (
-    <div className="space-y-2 w-full">
+    <div className=" w-full">
       <Label>{label}</Label>
       {children}
     </div>
@@ -73,7 +73,7 @@ function FormField({
 
 function Label({ children }: { children: React.ReactNode }) {
   return (
-    <label className="block font-semibold mb-1">
+    <label className="block font-semibold">
       {children}
     </label>
   )
