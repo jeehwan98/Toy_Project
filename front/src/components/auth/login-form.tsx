@@ -5,7 +5,6 @@ import React, { useActionState, useRef } from "react";
 import { Button } from "../ui/button";
 
 export default function LoginForm() {
-
   const formRef = useRef<HTMLFormElement>(null);
   const [data, action, isPending] = useActionState(loginAction, undefined);
 
@@ -13,7 +12,7 @@ export default function LoginForm() {
     <form
       action={action}
       ref={formRef}
-      className="max-w-md mx-auto space-y-6"
+      className="max-w-lg mx-auto space-y-6 w-64"
     >
       <div className="space-y-4">
         <FormField label="Email">
