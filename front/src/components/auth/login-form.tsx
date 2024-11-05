@@ -2,17 +2,12 @@
 
 import { loginAction } from "@/lib/actions/login-action";
 import React, { useActionState, useRef } from "react";
-import { useFormStatus } from "react-dom";
 import { Button } from "../ui/button";
 
 export default function LoginForm() {
 
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, action] = useActionState(loginAction, { message: '' });
-
-  if (state.message === "success") {
-    formRef.current?.reset();
-  }
+  const [data, action, isPending] = useActionState(loginAction, undefined);
 
   return (
     <form
@@ -27,26 +22,31 @@ export default function LoginForm() {
             name="email"
             placeholder="name@example.com"
           />
+          {data?.email && (
+            <div className="text-red-500">{data?.email}</div>
+          )}
         </FormField>
         <FormField label="Password">
           <Input
             type="password"
             name="password"
           />
+          {data?.password && (
+            <div className="text-red-500">{data.password}</div>
+          )}
         </FormField>
       </div>
-      <LoginButton />
+      <LoginButton isPending={isPending} />
     </form>
   );
 }
 
-function LoginButton() {
-  const status = useFormStatus();
+function LoginButton({ isPending }: { isPending: boolean }) {
   return (
     <Button
       className="w-full font-semibold py-2 px-4"
     >
-      {status.pending ? "Logging..." : "Login"}
+      {isPending ? "Logging..." : "Login"}
     </Button>
   );
 }
