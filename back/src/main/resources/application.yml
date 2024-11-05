@@ -1,0 +1,26 @@
+app:
+  allowed-origins: http://localhost
+  database:
+    name: toy_project
+    username: toy_project
+    password: password
+    host: localhost
+    port: 3306
+
+spring:
+  application:
+    name: toy_project
+  datasource:
+    url: jdbc:mysql://${app.database.host}:${app.database.port}/${app.database.name}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${app.database.username}
+    password: ${app.database.password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
