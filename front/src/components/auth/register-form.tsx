@@ -31,7 +31,7 @@ export default function RegisterForm() {
         </FormField>
         <FormField label="Password">
           <Input
-            type="text"
+            type="password"
             name="password"
           />
           {data?.password && (
@@ -40,7 +40,7 @@ export default function RegisterForm() {
         </FormField>
         <FormField label="Password Confirmation">
           <Input
-            type="text"
+            type="password"
             name="passwordConfirmation"
           />
           {data?.passwordConfirmation && (

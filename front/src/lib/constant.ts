@@ -1,3 +1,13 @@
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const API_URLS = Object.freeze({
+  LOGIN_URL: `${BASE_URL}/auth/login`,
+  LOGOUT_URL: `${BASE_URL}/auth/logout`,
+  REGISTER_URL: `${BASE_URL}/auth/register`,
+  USER_URL: `${BASE_URL}/users`,
+  AUTH_USER_URL: `${BASE_URL}/auth/users`,
+})
+
 const VALIDATE = Object.freeze({
   EMAIL_REGEX: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   PASSWORD_REGEX: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -13,6 +23,8 @@ const ERROR = Object.freeze({
 });
 
 export {
+  API_URLS,
   VALIDATE,
   ERROR
 }
+
