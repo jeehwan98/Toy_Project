@@ -4,6 +4,12 @@ interface RegisterProps {
   email: string;
 }
 
+interface LoginProps {
+  email: string;
+  password: string;
+}
+
 export type {
-  RegisterProps
+  RegisterProps,
+  LoginProps,
 }

@@ -1,6 +1,6 @@
 "use server"
 
-import { registerUserAPI } from "@/api/auth/auth-api";
+import { registerUserAPI } from "@/lib/api/auth-api";
 import { validateUserRegister } from "../validation/auth-validation";
 import { revalidatePath } from "next/cache";
 

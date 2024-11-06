@@ -1,17 +1,30 @@
-import { authOptions } from "@/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client"
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/register");
+import { jwtDecode } from "jwt-decode";
+
+export default function Home() {
+  let userDetails = "";
+  const authenticated = localStorage.getItem('token');
+
+  if (authenticated) {
+    userDetails = jwtDecode(authenticated);
   }
-  return (
-    <>
-      <div>HomePage</div>
-      <h1>Welcome, {session.user?.name}</h1>
-    </>
-  );
+
+  // const logout = localStorage.removeItem('token');
+  console.log(userDetails);
+
+
+  if (authenticated) {
+    return (
+      <>
+        <div>HomePage</div>
+        <div>{userDetails.name}</div>
+      </>
+    );
+  } else {
+    return (
+      <div>not authenticated. go back</div>
+    )
+  }
 }

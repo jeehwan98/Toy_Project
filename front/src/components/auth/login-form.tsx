@@ -1,12 +1,21 @@
 "use client"
 
 import { loginAction } from "@/lib/actions/login-action";
-import React, { useActionState, useRef } from "react";
+import React, { useActionState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [data, action, isPending] = useActionState(loginAction, undefined);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('token', data.token);
+      router.push("/");
+    }
+  }, [data, router]);
 
   return (
     <form

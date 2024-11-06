@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import DarkLightToggle from "@/components/theme/dark-light-toggle";
+import Provider from "../Provider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -29,15 +30,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <DarkLightToggle />
-          {children}
-        </ThemeProvider>
+        <Provider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <DarkLightToggle />
+            {children}
+          </ThemeProvider>
+        </Provider>
       </body>
     </html>
   );

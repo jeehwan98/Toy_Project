@@ -1,7 +1,7 @@
 "use server"
 
-import { ERROR } from "../constant";
-import { isValidEmail, isValidPassword } from "../validation/auth-validation";
+import { loginUserAPI } from "@/lib/api/auth-api";
+import * as cookie from 'cookie';
 
 export async function loginAction(prevState: unknown, formData: FormData) {
   const errors = {
@@ -14,16 +14,23 @@ export async function loginAction(prevState: unknown, formData: FormData) {
     password: formData.get("password") as string,
   };
 
-  const validateEmail = isValidEmail(inputtedDetails.email);
+  const details = await loginUserAPI(inputtedDetails);
+  const { token, user } = details;
 
-  if (!validateEmail) {
-    errors.email = ERROR.INVALID_EMAIL_INPUT;
+  if (details) {
+    const tokenCookie = cookie.serialize('token', details.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 60 * 60 * 3,
+      path: '/',
+    });
+    return {
+      user: user,
+      token: token,
+    };
+  } else {
+    console.log("failed");
   }
-  const validatePassword = isValidPassword(inputtedDetails.password);
-
-  if (!validatePassword) {
-    errors.password = ERROR.INVALID_PASSWORD_INPUT;
-  };
 
   return errors;
 };
